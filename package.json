@@ -1,10 +1,13 @@
 {
   "name": "elegant",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "a command line tool to build an elegant Front End Architecture",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "elegant": "./index.js"
   },
   "keywords": [],
   "author": "",
