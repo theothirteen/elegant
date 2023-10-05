@@ -4,9 +4,14 @@
 
 ## Building with Atomic Design
 
+<img src="../assets/img/atomic-design.png.jpeg">
+
 ## Standardizing Base Component Objects
+<img src="../assets/img/css-components.webp.jpeg">
 
 ## Understanding the base pattern of theming
+
+<img src="../assets/img/css-theme.webp.jpeg">
 
 ## Identifying an Organism in Design 
 
