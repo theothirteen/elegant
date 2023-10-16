@@ -1,3 +1,5 @@
+import './SiteHeader.style.css';
+
 export default function SiteHeader({ headerData, events }) {
   const {brandName, theme } = headerData;
   const { onThemeChangeClick } = events;
@@ -10,7 +12,7 @@ export default function SiteHeader({ headerData, events }) {
           <h1>{brandName}</h1>
         </div>
         <div>
-          <h1 role="button" onClick={() => onThemeChangeClick()} className="text-right">{theme === "dark" ? "☀️" : "🌙"}</h1>
+          <h1 role="button" onClick={() => onThemeChangeClick()} className="text-right pointer">{theme === "dark" ? "☀️" : "🌙"}</h1>
         </div>
       </div>
       <br />

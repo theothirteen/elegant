@@ -1,7 +1,6 @@
 const intialConfigState = {
   name: "Todo App",
   lang: "en",
-  themeMode: "light",
   theme: "light",
 };
 
