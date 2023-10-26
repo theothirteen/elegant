@@ -1,6 +1,6 @@
-const config = {
-  apiEndpoint: "http://localhost:3000/api",
-};
+// const config = {
+//   apiEndpoint: "http://localhost:3000/api",
+// };
 
 const TODO = "todo";
 

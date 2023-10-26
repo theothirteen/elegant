@@ -10,7 +10,7 @@ const TodoItems = ({ todos, onToggleClick, onEditClick, onDeleteClick }) => {
           key={todo.id}
           id={todo.id}
           {...todo}
-          onToggleClick={() => onToggleClick(todo.id)}
+          onToggleClick={() => onToggleClick(todo)}
           onEditClick={() => onEditClick(todo)}
           onDeleteClick={() => onDeleteClick(todo.id)}
         />

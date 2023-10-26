@@ -1,14 +1,19 @@
+import { toggleCheckedState } from "./todo.helper";
 import intialTodoState from "./todo.initial";
 import {
   CREATE_TODO,
   CREATE_TODO_ERROR,
   CREATE_TODO_SUCCESS,
   DELETE_TODO,
+  DELETE_TODO_ERROR,
+  DELETE_TODO_SUCCESS,
   EDIT_TODO,
   READ_TODO,
   READ_TODO_ERROR,
   READ_TODO_SUCCESS,
   TOGGLE_TODO,
+  TOGGLE_TODO_ERROR,
+  TOGGLE_TODO_SUCCESS,
   UPDATE_TODO,
   UPDATE_TODO_ERROR,
   UPDATE_TODO_SUCCESS,
@@ -18,32 +23,40 @@ const todo = (state = intialTodoState, action) => {
   let todoItems = [];
 
   switch (action.type) {
+    // Standard Content Loading
     case READ_TODO:
       return {
         ...state,
         isLoading: true,
+        isContentLoading: true,
       };
     case READ_TODO_SUCCESS:
       return {
         ...state,
         isLoading: false,
+        isContentLoading: false,
         todoItems: action.payload,
       };
     case READ_TODO_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        isContentLoading: false,
+        error: action.error,
       };
+    // Standard Action Modification
     case CREATE_TODO:
       return {
         ...state,
         isLoading: true,
+        isActionLoading: true,
+        currentTodoItem: action.payload,
       };
     case CREATE_TODO_SUCCESS:
       return {
         ...state,
         isLoading: false,
+        isActionLoading: false,
         todoItems: [
           ...state.todoItems,
           {
@@ -52,18 +65,23 @@ const todo = (state = intialTodoState, action) => {
             completed: false,
           },
         ],
+        currentTodoItem: intialTodoState.currentTodoItem,
       };
     case CREATE_TODO_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        isActionLoading: false,
+        error: action.error,
+        currentTodoItem: intialTodoState.currentTodoItem,
       };
+    // Selected Entity for Forms, tabs, page type
     case EDIT_TODO:
       return {
         ...state,
         currentTodoItem: action.payload,
       };
+    // Partial Action Modification 
     case UPDATE_TODO:
       todoItems = state.todoItems.map((todo) =>
         todo.id === action.payload.id
@@ -72,31 +90,35 @@ const todo = (state = intialTodoState, action) => {
       );
       return {
         ...state,
-        isButtonLoading: true,
+        isActionLoading: true,
         todoItems,
-        currentTodoItem: intialTodoState.currentTodoItem,
+        currentTodoItem: action.payload,
       };
     case UPDATE_TODO_SUCCESS:
       return {
         ...state,
-        isButtonLoading: false
+        isActionLoading: false,
+        currentTodoItem: intialTodoState.currentTodoItem,
       }
     case UPDATE_TODO_ERROR:
       return {
         ...state,
-        error: action.payload,
-        isButtonLoading: false
+        error: action.error,
+        isActionLoading: false,
+        currentTodoItem: intialTodoState.currentTodoItem,
       }
+    // Parallel Action Modification
     case TOGGLE_TODO:
       todoItems = state.todoItems.map((todo) =>
         todo.id === action.payload.id
-          ? { ...todo, completed: !todo.completed }
+          ? toggleCheckedState(todo)
           : todo
       );
       return {
         ...state,
         todoItems,
       };
+    // Parallel Action Modification
     case DELETE_TODO:
       todoItems = state.todoItems.filter(
         (todo) => todo.id !== action.payload.id
@@ -105,6 +127,20 @@ const todo = (state = intialTodoState, action) => {
         ...state,
         todoItems,
         currentTodoItem: intialTodoState.currentTodoItem,
+      };
+    case TOGGLE_TODO_SUCCESS:
+    case DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case TOGGLE_TODO_ERROR:
+    case DELETE_TODO_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+        todoItems: action.payload,
       };
     default:
       return state;

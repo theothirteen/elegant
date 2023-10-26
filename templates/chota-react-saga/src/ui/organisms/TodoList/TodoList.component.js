@@ -25,12 +25,13 @@ export default function TodoList({ todoData, events }) {
         onTodoAdd={onTodoCreate}
         onTodoUpdate={onTodoUpdate}
         placeholder="Add your task"
+        isLoading={todoData.isActionLoading}
         buttonInfo={{
           label: todoData.currentTodoItem.text ? "Save" : "Add",
           variant: "primary",
         }} // TODO: Work on Labels Concept
       />
-      {todoData.isLoading ? (
+      {todoData.isContentLoading ? (
         <>
           <br />
           <Skeleton height="24px" />
@@ -46,6 +47,7 @@ export default function TodoList({ todoData, events }) {
             onToggleClick={onTodoToggleUpdate}
             onDeleteClick={onTodoDelete}
             onEditClick={onTodoEdit}
+            isDisabled={todoData.isActionLoading}
           />
         </>
       )}

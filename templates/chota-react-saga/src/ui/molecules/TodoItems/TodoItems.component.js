@@ -3,7 +3,7 @@ import "./TodoItems.style.css";
 import TodoItem from "../../atoms/TodoItem/TodoItem.component";
 import { propTypes } from "./TodoItems.type";
 
-const TodoItems = ({ todos, onToggleClick, onEditClick, onDeleteClick }) => {
+const TodoItems = ({ todos, isDisabled, onToggleClick, onEditClick, onDeleteClick }) => {
   return todos && todos.length ? (
     <ul className="todo-items">
       {todos.map((todo) => (
@@ -11,7 +11,8 @@ const TodoItems = ({ todos, onToggleClick, onEditClick, onDeleteClick }) => {
           key={todo.id}
           id={todo.id}
           {...todo}
-          onToggleClick={() => onToggleClick(todo.id)}
+          isDisabled={isDisabled}
+          onToggleClick={() => onToggleClick(todo)}
           onEditClick={() => onEditClick(todo)}
           onDeleteClick={() => onDeleteClick(todo.id)}
         />

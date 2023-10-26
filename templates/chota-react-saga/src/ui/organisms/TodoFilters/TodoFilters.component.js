@@ -7,7 +7,7 @@ export default function TodoFilters({ filtersData, events }) {
   } = events;
   return (
     <>
-      {filtersData.isLoading ? (
+      {filtersData.isContentLoading ? (
         <div style={{display:'flex', gap: '1rem'}}>
           <Skeleton height="24px" />
           <Skeleton height="24px" />

@@ -3,21 +3,25 @@ import {
   CREATE_TODO_ERROR,
   CREATE_TODO_SUCCESS,
   DELETE_TODO,
+  DELETE_TODO_ERROR,
+  DELETE_TODO_SUCCESS,
   EDIT_TODO,
   READ_TODO,
   READ_TODO_ERROR,
   READ_TODO_SUCCESS,
+  TOGGLE_TODO,
+  TOGGLE_TODO_ERROR,
+  TOGGLE_TODO_SUCCESS,
   UPDATE_TODO,
   UPDATE_TODO_ERROR,
   UPDATE_TODO_SUCCESS,
 } from "./todo.type";
 
-let nextTodoId = 0;
 export const createTodo = (text) => ({
   type: CREATE_TODO,
   payload: {
-    id: nextTodoId++,
     text,
+    completed: false,
   },
 });
 
@@ -26,9 +30,9 @@ export const createTodoSuccess = (payload) => ({
   payload,
 });
 
-export const createTodoError = (payload) => ({
+export const createTodoError = (error) => ({
   type: CREATE_TODO_ERROR,
-  payload,
+  error,
 });
 
 export const readTodo = (payload) => ({
@@ -39,9 +43,9 @@ export const readTodoSuccess = (payload) => ({
   type: READ_TODO_SUCCESS,
   payload,
 });
-export const readTodoError = (payload) => ({
+export const readTodoError = (error) => ({
   type: READ_TODO_ERROR,
-  payload,
+  error,
 });
 
 export const editTodo = (payload) => ({
@@ -58,9 +62,22 @@ export const updateTodoSuccess = (payload) => ({
   payload,
 });
 
-export const updateTodoError = (payload) => ({
+export const updateTodoError = (error) => ({
   type: UPDATE_TODO_ERROR,
+  error,
+});
+
+export const toggleTodo = (payload) => ({
+  type: TOGGLE_TODO,
   payload,
+});
+export const toggleTodoSuccess = () => ({
+  type: TOGGLE_TODO_SUCCESS,
+});
+export const toggleTodoError = (payload, error) => ({
+  type: TOGGLE_TODO_ERROR,
+  payload,
+  error,
 });
 
 export const deleteTodo = (id) => ({
@@ -68,7 +85,12 @@ export const deleteTodo = (id) => ({
   payload: { id },
 });
 
-export const toggleTodo = (id) => ({
-  type: "TOGGLE_TODO",
-  payload: { id },
+export const deleteTodoSuccess = () => ({
+  type: DELETE_TODO_SUCCESS,
+});
+
+export const deleteTodoError = (payload, error) => ({
+  type: DELETE_TODO_ERROR,
+  payload,
+  error,
 });
