@@ -1,3 +1,7 @@
+---
+title: The UI Side
+layout: default
+---
 # The UI Side
 
 ## Building base HTML Scaffolding to JSON
