@@ -116,6 +116,7 @@ const todo = (state = intialTodoState, action) => {
       );
       return {
         ...state,
+        previousStateTodoItems: [...state.todoItems],
         todoItems,
       };
     // Parallel Action Modification
@@ -125,6 +126,7 @@ const todo = (state = intialTodoState, action) => {
       );
       return {
         ...state,
+        previousStateTodoItems: [...state.todoItems],
         todoItems,
         currentTodoItem: intialTodoState.currentTodoItem,
       };
@@ -132,12 +134,14 @@ const todo = (state = intialTodoState, action) => {
     case DELETE_TODO_SUCCESS:
       return {
         ...state,
+        previousStateTodoItems: undefined,
         isLoading: false,
       };
     case TOGGLE_TODO_ERROR:
     case DELETE_TODO_ERROR:
       return {
         ...state,
+        previousStateTodoItems: undefined,
         isLoading: false,
         error: action.error,
         todoItems: action.payload,

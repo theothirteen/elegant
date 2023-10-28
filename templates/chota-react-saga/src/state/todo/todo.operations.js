@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, takeLatest, call, select, delay } from "redux-saga/effects";
 import { CREATE_TODO, DELETE_TODO, READ_TODO, TOGGLE_TODO, UPDATE_TODO } from "./todo.type";
 import { createTodoError, createTodoSuccess, deleteTodoError, deleteTodoSuccess, readTodoError, readTodoSuccess, toggleTodoError, toggleTodoSuccess, updateTodoError, updateTodoSuccess } from "./todo.actions";
 import { mapTodoData, toggleCheckedState } from "./todo.helper";
@@ -20,15 +20,11 @@ export function deleteTodoApi(payload) {
   return fetchApi('/todos', { method: 'DELETE', body: payload });
 }
 
-export function* LoadTodoContent() {
-  const todoResponse = yield call(getTodoApi);
-  const todoData = yield todoResponse.json();
-  return mapTodoData(todoData);
-}
-
 export function* getTodos() {
   try {
-    const mappedTodoData = yield LoadTodoContent();
+    const todoResponse = yield call(getTodoApi);
+    const todoData = yield todoResponse.json();
+    const mappedTodoData = mapTodoData(todoData);
     yield put(readTodoSuccess(mappedTodoData));
   } catch (error) {
     yield put(readTodoError(error.toString()));
@@ -59,7 +55,8 @@ export function* updateToggleTodos(action) {
     yield call(updateTodoApi, toggleCheckedState(action.payload));
     yield put(toggleTodoSuccess());
   } catch (error) {
-    const mappedTodoData = yield call(LoadTodoContent);
+    yield delay(500);
+    const mappedTodoData = yield select((state) => state.todo.previousStateTodoItems);
     yield put(toggleTodoError(mappedTodoData, error.toString()));
   }
 }
@@ -69,7 +66,8 @@ export function* deleteTodos(action) {
     yield call(deleteTodoApi, action.payload);
     yield put(deleteTodoSuccess());
   } catch (error) {
-    const mappedTodoData = yield LoadTodoContent();
+    yield delay(500);
+    const mappedTodoData = yield select((state) => state.todo.previousStateTodoItems);
     yield put(deleteTodoError(mappedTodoData, error.toString()));
   }
 }
