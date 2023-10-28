@@ -1,4 +1,4 @@
-import { put, takeLatest, call, select } from "redux-saga/effects";
+import { put, takeLatest, call } from "redux-saga/effects";
 import { CREATE_TODO, DELETE_TODO, READ_TODO, TOGGLE_TODO, UPDATE_TODO } from "./todo.type";
 import { createTodoError, createTodoSuccess, deleteTodoError, deleteTodoSuccess, readTodoError, readTodoSuccess, toggleTodoError, toggleTodoSuccess, updateTodoError, updateTodoSuccess } from "./todo.actions";
 import { mapTodoData, toggleCheckedState } from "./todo.helper";
@@ -20,11 +20,15 @@ export function deleteTodoApi(payload) {
   return fetchApi('/todos', { method: 'DELETE', body: payload });
 }
 
+export function* LoadTodoContent() {
+  const todoResponse = yield call(getTodoApi);
+  const todoData = yield todoResponse.json();
+  return mapTodoData(todoData);
+}
+
 export function* getTodos() {
   try {
-    const todoResponse = yield call(getTodoApi);
-    const todoData = yield todoResponse.json();
-    const mappedTodoData = mapTodoData(todoData);
+    const mappedTodoData = yield LoadTodoContent();
     yield put(readTodoSuccess(mappedTodoData));
   } catch (error) {
     yield put(readTodoError(error.toString()));
@@ -33,7 +37,6 @@ export function* getTodos() {
 
 export function* addTodos(action) {
   try {
-    const todos = yield select((state) => state?.todo?.todoItems || []);
     const payload = { ...action.payload, id: window.crypto.randomUUID() };
     yield call(addTodoApi, payload);
     yield put(createTodoSuccess(payload));
@@ -56,7 +59,8 @@ export function* updateToggleTodos(action) {
     yield call(updateTodoApi, toggleCheckedState(action.payload));
     yield put(toggleTodoSuccess());
   } catch (error) {
-    yield put(toggleTodoError([], error.toString()));
+    const mappedTodoData = yield call(LoadTodoContent);
+    yield put(toggleTodoError(mappedTodoData, error.toString()));
   }
 }
 
@@ -65,7 +69,8 @@ export function* deleteTodos(action) {
     yield call(deleteTodoApi, action.payload);
     yield put(deleteTodoSuccess());
   } catch (error) {
-    yield put(deleteTodoError([], error.toString()));
+    const mappedTodoData = yield LoadTodoContent();
+    yield put(deleteTodoError(mappedTodoData, error.toString()));
   }
 }
 
