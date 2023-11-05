@@ -8,16 +8,27 @@ const NO_CHOICE_MADE = -1;
 const CURR_DIR = process.cwd();
 const templatesDir = path.join(__dirname, "templates");
 const templates = fse.readdirSync(templatesDir);
+let selectedTemplate = '';
+let index;
 
 if (!templates.length) {
   console.log("no template to choose from , templates folder is empty");
   process.exit(0);
 }
 
-const index = readLineSync.keyInSelect(templates);
+process.argv.forEach(function (val, index) {
+  if(val.includes('index.js')) {
+    const nextVal = process.argv[index + 1];
+    selectedTemplate = templates.find(t => t === nextVal);
+  }
+});
 
-if (index === NO_CHOICE_MADE) {
-  process.exit(0);
+if(!selectedTemplate) {
+  index = readLineSync.keyInSelect(templates);
+
+  if (index === NO_CHOICE_MADE) {
+    process.exit(0);
+  }
 }
 
 const projectName = readLineSync.question(
@@ -33,7 +44,7 @@ const confirmCreateDirectory = readLineSync.keyInYN(
 );
 
 if (confirmCreateDirectory) {
-  const template = templates[index];
+  const template = selectedTemplate || templates[index];
   const source = path.join(templatesDir, template);
   const destination = path.join(CURR_DIR, projectName);
   fse

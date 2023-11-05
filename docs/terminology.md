@@ -1,3 +1,7 @@
+---
+title: The UX Side
+layout: default
+---
 # Terminology
 List of all terminology used by the Elegant package to build the Front End Architecture. These terminologies are universal in nature and do not correspond to any specific framework.
 

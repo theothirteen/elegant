@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Input from './Input.component';
+import TodoItems from './TodoItems.component';
 import TestProvider from '../../../utils/providers/TestProvider';
 
-describe('<Input />', () => {
+describe('<TodoItems />', () => {
   it('Renders successfully without error', () => {
     const { container } = render(
       <TestProvider>
-        <Input />
+        <TodoItems />
       </TestProvider>,
     );
     expect(container).toBeTruthy();
