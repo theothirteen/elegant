@@ -1,3 +1,7 @@
+---
+title: The UX Side
+layout: default
+---
 # The UX Side
 
 ## Organism and State Operations connection
