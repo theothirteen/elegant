@@ -48,3 +48,4 @@ List of all terminology used by the Elegant package to build the Front End Archi
 | Operations        |   UX      |                                          |                                                       | |
 | Selectors      |   UX      |                                          |                                                       | |
 | Analytics      |   UX      |                                          |                                                       | |
+| [Duck Duck Go](https://duckduckgo.com)      |   UX      |                                          |                                                       | |
