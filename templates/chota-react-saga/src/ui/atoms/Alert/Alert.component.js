@@ -41,6 +41,8 @@ export default function Alert({ variant, show, message, onCloseClick }) {
           color="ffffff"
           iconName="x"
           size="16"
+          data-testid="onAlertCloseClick"
+          data-value={String(showAlert)}
           onClick={handleClose}
         />
       </div>
