@@ -4,6 +4,10 @@
 
 const TODO = "todo";
 
+if (!localStorage.getItem(TODO)) {
+  localStorage.setItem(TODO, '[]');
+}
+
 export default function fetchApi(
   path = "",
   options = { method: "GET", body: {} }
