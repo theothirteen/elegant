@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Input from './Input.component';
+import FilterGroup from './FilterGroup.component';
 import TestProvider from '../../../utils/providers/TestProvider';
 
-describe('<Input />', () => {
+describe('<FilterGroup />', () => {
   it('Renders successfully without error', () => {
     const { container } = render(
       <TestProvider>
-        <Input />
+        <FilterGroup filterItem={[]} />
       </TestProvider>,
     );
     expect(container).toBeTruthy();

@@ -1,8 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render } from '@testing-library/react';
 import TodoItem from './TodoItem.component';
+import TestProvider from '../../../utils/providers/TestProvider';
 
-test('renders learn react link', () => {
-  render(<TodoItem />);
-  const linkElement = screen.getByText(/Todo App/i);
-  expect(linkElement).toBeInTheDocument();
+describe('<TodoItem />', () => {
+  it('Renders successfully without error', () => {
+    const { container } = render(
+      <TestProvider>
+        <TodoItem />
+      </TestProvider>,
+    );
+    expect(container).toBeTruthy();
+  });
 });

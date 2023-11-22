@@ -24,7 +24,7 @@ export const deleteTodo = (id) => ({
   payload: { id },
 });
 
-export const toggleTodo = (id) => ({
+export const toggleTodo = (payload) => ({
   type: TOGGLE_TODO,
-  payload: { id },
+  payload,
 });
