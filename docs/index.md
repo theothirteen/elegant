@@ -14,16 +14,16 @@ Elegant is a command line tool to build frontend architecture in terms of UI and
 
 ## Working with UI and UX
 
-<img src="./assets//img/ui-ux-designer.webp">
+<img src="{{ '/assets/img/ui-ux-designer.webp' | relative_url }}">
 
 ## Developer's Perspective of UI and UX
 
-<img src="./assets//img/ui-ux-developer.webp">
+<img src="{{ '/assets/img/ui-ux-developer.webp' | relative_url }}">
 
 ## Enterprise Perspective of UI and UX
 
-<img src="./assets//img/new-fe-schema.jpeg">
+<img src="{{ '/assets/img/new-fe-schema.jpeg' | relative_url }}">
 
 ## Translating to Atomic Design, Server and State Operations
 
-<img src="./assets/img/elegant-devlopment-flow.jpeg">
+<img src="{{ '/assets/img/elegant-devlopment-flow.jpeg' | relative_url }}">
