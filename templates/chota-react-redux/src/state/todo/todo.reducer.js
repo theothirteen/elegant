@@ -34,11 +34,11 @@ const todo = (state = intialTodoState, action) => {
         currentTodoItem: intialTodoState.currentTodoItem,
       };
     case TOGGLE_TODO:
-      todoItems = state.todoItems.map((todo) =>
-        todo.id === action.payload.id
+      todoItems = state.todoItems.map((todo) => {
+        return todo.id === action.payload.id
           ? { ...todo, completed: !todo.completed }
           : todo
-      );
+      });
       return {
         ...state,
         todoItems,

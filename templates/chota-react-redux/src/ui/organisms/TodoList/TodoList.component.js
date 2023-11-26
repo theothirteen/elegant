@@ -1,4 +1,4 @@
-import FilterGroup from "../../molecules/FilterGroup/FilterGroup.component";
+import Alert from "../../atoms/Alert/Alert.component";
 import AddTodoForm from "../../molecules/AddTodoForm/AddTodoForm.component";
 import TodoItems from "../../molecules/TodoItems/TodoItems.component";
 import Skeleton from "../../skeletons/Skeleton/Skeleton.component";
@@ -9,37 +9,45 @@ export default function TodoList({ todoData, events }) {
     onTodoEdit,
     onTodoUpdate,
     onTodoToggleUpdate,
-    onTodoFilterUpdate,
     onTodoDelete,
   } = events;
   return (
     <>
+      {todoData.error ? (
+        <Alert
+          variant={"error"}
+          show={!!todoData.error}
+          message={todoData.error}
+        />
+      ) : null}
       <AddTodoForm
-        todoValue={todoData.todo.currentTodoItem.text || ""}
+        todoValue={todoData.currentTodoItem.text || ""}
         onTodoAdd={onTodoCreate}
         onTodoUpdate={onTodoUpdate}
-        label={todoData.currentTodoItem.id ? 'Save' : 'Add' } // TODO: Work on labels concept
+        placeholder="Add your task"
+        isLoading={todoData.isActionLoading}
+        buttonInfo={{
+          label: todoData.currentTodoItem.text ? "Save" : "Add",
+          variant: "primary",
+        }} // TODO: Work on Labels Concept
       />
-      {todoData.todo.isLoading ? (
+      {todoData.isContentLoading ? (
         <>
-          <br/>
+          <br />
           <Skeleton height="24px" />
-          <br/>
+          <br />
           <Skeleton height="24px" />
-          <br/>
+          <br />
           <Skeleton height="24px" />
         </>
       ) : (
         <>
           <TodoItems
-            todos={todoData.todo.todoItems || []}
+            todos={todoData.todoItems || []}
             onToggleClick={onTodoToggleUpdate}
             onDeleteClick={onTodoDelete}
             onEditClick={onTodoEdit}
-          />
-          <FilterGroup
-            filterItems={todoData.filters}
-            onFilterClick={onTodoFilterUpdate}
+            isDisabled={todoData.isActionLoading}
           />
         </>
       )}

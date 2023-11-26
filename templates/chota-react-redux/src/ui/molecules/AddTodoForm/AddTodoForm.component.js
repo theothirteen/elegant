@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../atoms/Input/Input.component";
 import Button from "../../atoms/Button/Button.component";
 
-const AddTodoForm = ({ buttonInfo, onTodoAdd, onTodoUpdate, todoValue }) => {
+const AddTodoForm = ({ buttonInfo, placeholder, isLoading, onTodoAdd, onTodoUpdate, todoValue }) => {
   const [inputValue, setInputValue] = useState(todoValue || '');
   const { label, variant } = buttonInfo;
 
@@ -30,8 +30,8 @@ const AddTodoForm = ({ buttonInfo, onTodoAdd, onTodoUpdate, todoValue }) => {
         }}
       >
         <div className="grouped">
-          <Input className="" value={inputValue} onChange={handleChange} />
-          <Button className={`button ${variant}`} type="submit">
+          <Input className="" value={inputValue} disabled={isLoading} placeholder={placeholder} onChange={handleChange} />
+          <Button className={`button ${variant}`} isLoading={isLoading} type="submit">
             {label}
           </Button>
         </div>

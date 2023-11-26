@@ -1,10 +1,10 @@
 var textArray = [
   "UI UX Oriented",
   "Framework Agnostic",
+  "Atomic Design Ready",
   "Modular",
   "Scalable",
   "Fully Test Covered",
-  "Comprehensive",
   "Development Savvy",
   "Storybook Enabled",
   "Performance Oriented",
