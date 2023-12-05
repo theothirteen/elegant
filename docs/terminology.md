@@ -18,7 +18,7 @@ List of all terminology used by the Elegant package to build the Front End Archi
 | Skeleton | UI | Loading state | Provide place holder while API or component is lazy loading | https://www.nngroup.com/articles/skeleton-screens/ |
 | Organism | UI | UI connector to state | deliver UX scaffolding to UI | https://atomicdesign.bradfrost.com/chapter-2/#organisms |
 | Widget | UI | Framework agnostic entity with built-in API capabilities | Serve a common entity between various framework | TBD |
-| Layout | UI | Structural compartment of a page | serves structural responsiveness to page | TBD |
+| Layout / Template | UI | Structural compartment of a page | serves structural responsiveness to page | TBD |
 | Story | UI | A description of interactiveness of a component | a guide to the existing feature of a component | https://storybook.js.org/docs/react/writing-stories/introduction |
 | Theme | UI | A Styling conduct of site | provides unique identity and branding | https://binyamin.medium.com/styled-components-vs-css-sass-css-in-jsx-c3c9268e8945 |
 | Atomic Design | UI | details all that goes into creating and maintaining robust design systems | It allowing you to roll out higher quality, more consistent UIs faster than ever before | https://atomicdesign.bradfrost.com/ |
@@ -40,6 +40,9 @@ List of all terminology used by the Elegant package to build the Front End Archi
 | Authentication | Server | TBD | TBD | https://zivukushingai.medium.com/everything-you-need-to-know-about-frontend-and-backend-authentication-ultimate-guide-7142a752249c |
 | Session | Server | TBD | TBD | https://auth0.com/blog/application-session-management-best-practices/ |
 | Forms | Server | TBD | TBD | https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form https://cloudfour.com/thinks/autofill-what-web-devs-should-know-but-dont/ |
+| Links | Server | TBD | TBD | TBD |
+| Images | Server | TBD | TBD | TBD |
+| Localization | Server | TBD | TBD | TBD |
 | PWA | Server | TBD | TBD | https://web.dev/explore/progressive-web-apps |
 | Page Unit testing | Server | TBD | TBD | TBD |
 | State | UX | keeping track of how an application's data changes over time. | ensure that changes reflect real-world context and business processes | https://deadsimplechat.com/blog/react-state-management-modern-guide/ https://css-tricks.com/build-a-state-management-system-with-vanilla-javascript/ |
